@@ -1,3 +1,23 @@
+public class TrieNode
+{
+    public Dictionary<char, TrieNode> Children { get; set; }
+    public bool IsEndOfWord { get; set; }
+
+    public char _value;
+
+    public TrieNode(char value = ' ')
+    {
+        Children = new Dictionary<char, TrieNode>();
+        IsEndOfWord = false;
+        _value = value;
+    }
+
+    public bool HasChild(char c)
+    {
+        return Children.ContainsKey(c);
+    }
+}
+
 public class Trie
 {
     private TrieNode root;
@@ -5,6 +25,27 @@ public class Trie
     public Trie()
     {
         root = new TrieNode();
+    }
+
+    public TrieNode _getNode()
+    {
+        return root;
+    }
+
+    public bool Search(string word)
+    {
+        TrieNode current = root;
+
+        foreach (char c in word)
+        {
+            if (!current.HasChild(c))
+            {
+                return false;
+            }
+            current = current.Children[c];
+        }
+
+        return current.IsEndOfWord;
     }
 
     public bool Insert(string word)
@@ -15,7 +56,7 @@ public class Trie
         {
             if (!current.HasChild(c))
             {
-                current.Children[c] = new TrieNode();
+                current.Children[c] = new TrieNode(c);
             }
             current = current.Children[c];
         }
@@ -29,6 +70,7 @@ public class Trie
         return true;
     }
 
+    // TODO - not sure if this will be part of the starter code or not yet
     public List<string> AutoSuggest(string prefix)
     {
         TrieNode currentNode = root;
@@ -45,6 +87,7 @@ public class Trie
         return GetAllWordsWithPrefix(currentNode, prefix);
     }
 
+    // TODO - not sure if this will be part of the starter code or not yet
     private List<string> GetAllWordsWithPrefix(TrieNode root, string prefix)
     {
         List<string> words = new List<string>();
@@ -62,25 +105,9 @@ public class Trie
         return words;
     }
 
+    // TODO - If GetAllWordsWithPrefix is removed, this should be to
     public List<string> GetAllWords()
     {
         return GetAllWordsWithPrefix(root, "");
-    }
-}
-
-public class TrieNode
-{
-    public Dictionary<char, TrieNode> Children { get; set; }
-    public bool IsEndOfWord { get; set; }
-
-    public TrieNode()
-    {
-        Children = new Dictionary<char, TrieNode>();
-        IsEndOfWord = false;
-    }
-
-    public bool HasChild(char c)
-    {
-        return Children.ContainsKey(c);
     }
 }
