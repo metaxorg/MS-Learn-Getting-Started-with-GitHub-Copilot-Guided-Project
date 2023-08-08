@@ -12,14 +12,20 @@ Trie dictionary = InitializeTrie(words);
 PrintTrie(dictionary);
 GetPrefixInput();
 
+
+// This method initializes a Trie data structure with the given array of words.
 Trie InitializeTrie(string[] words)
 {
+    // Create a new Trie object.
     Trie trie = new Trie();
+
+    // Insert each word in the array into the Trie.
     foreach (string word in words)
     {
         trie.Insert(word);
     }
 
+    // Return the initialized Trie.
     return trie;
 }
 
@@ -34,6 +40,14 @@ void PrintTrie(Trie trie)
     Console.WriteLine();
 }
 
+
+void PrintTrieStructure(Trie trie)
+{
+    TrieNode root = trie._getNode();
+    Console.WriteLine("\nroot");
+    _printTrieNodes(root);
+}
+
 void GetPrefixInput()
 {
     Console.WriteLine("\nEnter a prefix to search for, then press Tab to " + 
@@ -42,7 +56,7 @@ void GetPrefixInput()
     bool running = true;
     string prefix = "";
     StringBuilder sb = new StringBuilder();
-    List<string> words = null;
+    List<string>? words = null;
     int wordsIndex = 0;
 
     while(running)
@@ -67,7 +81,7 @@ void GetPrefixInput()
         }
         else if (input.Key == ConsoleKey.Enter)
         {
-            Console.WriteLine(sb.ToString());
+            Console.WriteLine();
             running = false;
             continue;
         }
@@ -113,13 +127,6 @@ void GetPrefixInput()
             wordsIndex = 0;
         }
     }
-}
-
-void PrintTrieStructure(Trie trie)
-{
-    TrieNode root = trie._getNode();
-    Console.WriteLine("\nroot");
-    _printTrieNodes(root);
 }
 
 void _printTrieNodes(TrieNode root, string format = " ", bool isLastChild = true) 

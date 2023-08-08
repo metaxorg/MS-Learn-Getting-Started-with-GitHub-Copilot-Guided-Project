@@ -4,47 +4,110 @@ description: Exercise - Use Copilot to interpret code
 durationInMinutes: 5
 ---
 
-TODO specify this exercise is for Copilot Chat
-
 TODO - Introduction
+
+TODO - Note, this exercise uses features of Copilot Chat
 
 > [!IMPORTANT]
 > You need to have completed the Setup instructions in the previous unit, Prepare, before you begin this Exercise.
 
-## Use Copilot to explain code
+## Use Copilot Chat to explain code
 
 In this task, you'll use Copilot to explain the existing code Let's get started!
 
 1. TODO navigate to project folder
 
-1. Open the `Trie.cs` file.
+1. Open the **Trie.cs** file.
 
-Select the TrieNode constructor. 
-Right-click, under Copilot, select Explain this
-Note the explanations for the `children` and `isWord` properties.
+1. Select the `TrieNode` constructor code.
 
-Select the Trie insert method
-Right-click, under Copilot, select Explain this
-In the chat, enter “Explain line by line”
-Note the explanations for each line of code
+    ```c#
+    public TrieNode(char value = ' ')
+    {
+        Children = new Dictionary<char, TrieNode>();
+        IsEndOfWord = false;
+        _value = value;
+    }
+    ```
 
-Navigate to Program.cs
-Select the `InitializeTrie` method
-Right-click, under Copilot, select Explain this
-Note the explanation
+1. Right-click the selected code. Under **Copilot**, click **Explain this**
 
-Document a single method:
-Right click anywhere in the Main method
-Under Copilot, click Start Code Chat
-Enter “Add comments to this code”
-View the suggested code comments
-Click Accept
+    The "Explain this" feature of Copilot Chat can help developers quickly understand a new codebase. Copilot Chat provides explanations for selected code, including the purpose of the code, the data types, and the return values.
 
-Document an entire class:
-Navigate to Trie.cs
-Right click anywhere in the file
-Under Copilot, click Generate Docs
+    In the explanation Copilot Chat provides, note the descriptions of the `Children` and `IsEndOfWord` properties.
+
+1. Select the Trie `Insert` method code.
+
+    Ensure that the entire method is selected.
+
+1. Right-click the selected code. Under **Copilot**, click **Explain this**
+
+1. In the chat, enter "Explain line by line"
+    
+    Copilot Chat provides an explanation for each line of code in the selection.
+
+## Add code comments with Copilot
+
+TODO - Introduction something like: You can use Copilot to auto-complete code comments.
+
+1. Navigate to the `Insert` method in **Trie.cs**
+
+1. Enter a new line before the `foreach` loop.
+
+1. Begin typing `// For` and wait for Copilot to auto-complete the code comment.
+
+    Copilot should suggest something like: `For each character in the word`
+
+1. Enter a new line above the `if` statement.
+
+1. Begin typing `// If` and wait for Copilot to auto-complete the code comment.
+
+    Copilot should suggest something like: `If the current node doesn't have a child with the current character`
+
+1. Enter a new line above the line: `current.Children[c] = new TrieNode(c);`
+
+1. Begin typing `// ` and wait for Copilot to auto-complete the code comment.
+
+    Copilot should suggest something like: `Add a new child with the current character`
+
+    Since you established a pattern of adding code comments, you might notice that Copilot Chat needs less prompting to suggest code comments.
+
+1. Continue with this pattern to add comments to the rest of the code in the `Insert` method.
+
+    ![Copilot auto-completes comments for the code](../media/InsertCommentsExample.png)
+
+## Add code comments using Copilot Chat
+
+TODO - Introduction. Something like rather than prompting Copilot to add a comment to a single line of code, you can use Copilot Chat to add comments for multiple lines of code.
+
+1. Navigate to **Program.cs**
+
+1. Select the `InitializeTrie` method code and right-click the selection
+
+1. Under **Copilot**, click **Start Code Chat**
+
+1. Enter the text "Insert comments to explain this code line by line"
+
+    Copilot Chat should suggest comments for each line of code in the selection.
+
+    ![Copilot Chat suggests comments for each line of code in the selection](../media/InsertCommentsExample.png)
+
+1. Click **Accept**
+
+    Copilot Chat should add the comments to the code.
+
+## Add code documentation with Copilot Chat
+
+1. Navigate to **Trie.cs**
+
+1. Select the `AutoSuggest` method and right-click the selection.
+
+1. Under **Copilot**, click **Generate Docs**
+
+    Copilot Chat should generate suggested documentation for the method. If no suggestion appears, click the **Regenerate** button.
+
+1. Click **Accept** to add the documentation to the code.
 
 ## Check your work
 
-In this task, you'll check that... TODO
+TODO - Not sure how this section will work or if we will just omit it

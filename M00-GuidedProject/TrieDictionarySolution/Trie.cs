@@ -32,6 +32,7 @@ public class Trie
         return root;
     }
 
+    // Learner will write this code
     public bool Search(string word)
     {
         TrieNode current = root;
@@ -47,30 +48,38 @@ public class Trie
 
         return current.IsEndOfWord;
     }
-
+    
     public bool Insert(string word)
     {
+        // Start at the root node
         TrieNode current = root;
 
+        // For each character in the word
         foreach (char c in word)
         {
+            // If the current node doesn't have a child with the current character
             if (!current.HasChild(c))
             {
+                // Add a new child with the current character
                 current.Children[c] = new TrieNode(c);
             }
+            // Move to the child node with the current character
             current = current.Children[c];
         }
 
         if (current.IsEndOfWord)
         {
+            // Word already exists in the trie
             return false;
         }
         
+        // Mark the end of the word
         current.IsEndOfWord = true;
+
+        // Word successfully inserted into the trie
         return true;
     }
-
-    // TODO - not sure if this will be part of the starter code or not yet
+    
     public List<string> AutoSuggest(string prefix)
     {
         TrieNode currentNode = root;
@@ -87,7 +96,12 @@ public class Trie
         return GetAllWordsWithPrefix(currentNode, prefix);
     }
 
-    // TODO - not sure if this will be part of the starter code or not yet
+    /// <summary>
+    /// Recursively gets all words in the trie that start with the given prefix.
+    /// </summary>
+    /// <param name="root">The root node of the trie.</param>
+    /// <param name="prefix">The prefix to search for.</param>
+    /// <returns>A list of all words in the trie that start with the given prefix.</returns>
     private List<string> GetAllWordsWithPrefix(TrieNode root, string prefix)
     {
         List<string> words = new List<string>();
@@ -105,12 +119,12 @@ public class Trie
         return words;
     }
 
-    // TODO - If GetAllWordsWithPrefix is removed, this should be to
     public List<string> GetAllWords()
     {
         return GetAllWordsWithPrefix(root, "");
     }
 
+    // Learner will write this code
     private bool DeleteHelper(TrieNode root, string word, int index)
     {
         if (index == word.Length)
@@ -140,6 +154,7 @@ public class Trie
         return false;
     }
 
+    // Learner will write this code
     public bool Delete(string word)
     {
         return DeleteHelper(root, word, 0);

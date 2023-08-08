@@ -1,35 +1,26 @@
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+/*using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace TrieTest;
 
+[TestClass]
 public class UnitTest1
 {
-    /*
-    [TestInitialize]
-    public void Insert()
-    {
-        // Create an array of random words
-        string[] words = {
-            "aardvark", "actual", "act", "blue", 
-            "blew", "blast", "factual", "facet", 
-            "facade", "trap", "trapeze", "toast"};
-        
-        Trie trie = new Trie();
-        foreach (string word in words)
-        {
-            trie.Insert(word);
-        }
-    }
+    // Initialize a Trie that can be used by all test methods
+    private static Trie _trie = new Trie();
+    private static string[] words = { "apple", "app", "application", "applied", "apply", "appreciate", "appreciation", "appreciative" };
 
+    // Test that words are correctly inserted into the trie
     [TestMethod]
-    public void GetAllWords()
+    public void InsertTest()
     {
-        List<string> allWords = trie.GetAllWords();
-        Assert.AreEqual(words.Length, allWords.Count);
         foreach (string word in words)
         {
-            Assert.IsTrue(allWords.Contains(word));
+            _trie.Insert(word);
+        }
+
+        foreach (string word in words)
+        {
+            Assert.IsTrue(_trie.Search(word));
         }
     }
-    */
-}
+*/
