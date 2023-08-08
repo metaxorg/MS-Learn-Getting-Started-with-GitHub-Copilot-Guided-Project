@@ -1,9 +1,12 @@
-﻿string[] words = {
-        "as", "astronaut", "asteroid", 
+﻿using System.Text;
+
+string[] words = {
+        "as", "astronaut", "asteroid", "are", "around",
         "cat", "cars", "cares", "careful", "carefully",
-        "money", "monday", "mellow", "monster",
+        "for", "follows", "forgot", "from", "front",
+        "mellow", "mean", "money", "monday", "monster",
         "place", "plan", "planet", "planets", "plans",
-        "the", "their", "they", "there"};
+        "the", "their", "they", "there", "towards"};
 
 Trie dictionary = InitializeTrie(words);
 PrintTrie(dictionary);
@@ -33,57 +36,71 @@ void PrintTrie(Trie trie)
 
 void GetPrefixInput()
 {
-    Console.WriteLine("\nEnter a prefix to search for. Press Tab to cycle through suggestions. Press Enter to exit.");
+    Console.WriteLine("\nEnter a prefix to search for, then press Tab to " + 
+                      "cycle through search results. Press Enter to exit.");
 
     bool running = true;
-    string suggestedWord = "";
     string prefix = "";
-    string buffer = "";
+    StringBuilder sb = new StringBuilder();
     List<string> words = null;
     int wordsIndex = 0;
 
     while(running)
     {
         var input = Console.ReadKey(true);
+
         if (input.Key == ConsoleKey.Spacebar)
         {
             Console.Write(' ');
             prefix = "";
-            suggestedWord = "";
+            sb.Append(' ');
             continue;
         } 
-        else if (input.Key == ConsoleKey.Backspace)
+        else if (input.Key == ConsoleKey.Backspace && Console.CursorLeft > 0)
         {
-            // TODO this is buggy when the user erases part of the suggested word and hits tab again
             Console.SetCursorPosition(Console.CursorLeft - 1, Console.CursorTop);
             Console.Write(' ');
             Console.SetCursorPosition(Console.CursorLeft - 1, Console.CursorTop);
 
-            prefix = prefix.Substring(0, prefix.Length - 1);
+            sb.Remove(sb.Length - 1, 1);
+            prefix = sb.ToString().Split(' ').Last();
         }
         else if (input.Key == ConsoleKey.Enter)
         {
-            Console.Write(input.KeyChar);
+            Console.WriteLine(sb.ToString());
             running = false;
             continue;
         }
         else if (input.Key == ConsoleKey.Tab && prefix.Length > 1)
         {
-            if (words == null) {
+            string previousWord = sb.ToString().Split(' ').Last();
+
+            if (words != null) {
+                if (!previousWord.Equals(words[wordsIndex - 1]))
+                {
+                    words = dictionary.AutoSuggest(prefix);
+                    wordsIndex = 0;
+                }
+            } 
+            else {
                 words = dictionary.AutoSuggest(prefix);
+                wordsIndex = 0;
             }
-            // Delete the suggested word from the Console Output
-            for (int i = prefix.Length; i < suggestedWord.Length; i++)
+
+            for (int i = prefix.Length; i < previousWord.Length; i++)
             {
                 Console.SetCursorPosition(Console.CursorLeft - 1, Console.CursorTop);
                 Console.Write(' ');
                 Console.SetCursorPosition(Console.CursorLeft - 1, Console.CursorTop);
+                sb.Remove(sb.Length - 1, 1);
             }
+        
             
             if (words.Count > 0 && wordsIndex < words.Count)
             {
-                suggestedWord = words[wordsIndex++];
-                Console.Write(suggestedWord.Substring(prefix.Length));
+                string output = words[wordsIndex++];
+                Console.Write(output.Substring(prefix.Length));
+                sb.Append(output.Substring(prefix.Length));
             }
             continue;
         }
@@ -91,6 +108,7 @@ void GetPrefixInput()
         {
             Console.Write(input.KeyChar);
             prefix += input.KeyChar;
+            sb.Append(input.KeyChar);
             words = null;
             wordsIndex = 0;
         }
