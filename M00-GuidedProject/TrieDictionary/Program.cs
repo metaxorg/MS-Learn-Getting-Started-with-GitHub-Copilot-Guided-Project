@@ -6,6 +6,7 @@
 Trie dictionary = InitializeTrie(words);
 PrintTrie(dictionary);
 GetPrefixInput();
+PrintTrieStructure(dictionary);
 
 Trie InitializeTrie(string[] words)
 {

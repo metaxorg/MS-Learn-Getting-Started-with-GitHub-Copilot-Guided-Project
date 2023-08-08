@@ -48,39 +48,6 @@ public class Trie
         return current.IsEndOfWord;
     }
 
-    // Method to remove a word from the trie
-    private bool RemoveNodes(TrieNode root, string word, int index)
-    {
-        if (index == word.Length)
-        {
-            if (!root.IsEndOfWord)
-            {
-                return false;
-            }
-            // Unmark the end of word
-            root.IsEndOfWord = false;
-            return root.Children.Count == 0;
-        }
-
-        // Recursively delete the word
-        char c = word[index];
-        TrieNode node = root.Children[c];
-        if (node == null)
-        {
-            return false;
-        }
-
-        bool shouldDeleteCurrentNode = RemoveNodes(node, word, index + 1);
-
-        if (shouldDeleteCurrentNode)
-        {
-            root.Children.Remove(c);
-            return root.Children.Count == 0;
-        }
-
-        return false;
-    }
-
     public bool Insert(string word)
     {
         TrieNode current = root;
@@ -142,5 +109,39 @@ public class Trie
     public List<string> GetAllWords()
     {
         return GetAllWordsWithPrefix(root, "");
+    }
+
+    private bool DeleteHelper(TrieNode root, string word, int index)
+    {
+        if (index == word.Length)
+        {
+            if (!root.IsEndOfWord)
+            {
+                return false;
+            }
+            root.IsEndOfWord = false;
+            return root.Children.Count == 0;
+        }
+
+        char c = word[index];
+        if (!root.HasChild(c))
+        {
+            return false;
+        }
+
+        bool shouldDeleteCurrentNode = DeleteHelper(root.Children[c], word, index + 1);
+
+        if (shouldDeleteCurrentNode)
+        {
+            root.Children.Remove(c);
+            return root.Children.Count == 0;
+        }
+
+        return false;
+    }
+
+    public bool Delete(string word)
+    {
+        return DeleteHelper(root, word, 0);
     }
 }
