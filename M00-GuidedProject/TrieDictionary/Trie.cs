@@ -27,11 +27,6 @@ public class Trie
         root = new TrieNode();
     }
 
-    public TrieNode _getNode()
-    {
-        return root;
-    }
-    
     public bool Insert(string word)
     {
         TrieNode current = root;

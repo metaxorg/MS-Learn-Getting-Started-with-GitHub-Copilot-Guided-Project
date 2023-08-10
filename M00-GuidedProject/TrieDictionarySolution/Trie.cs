@@ -27,11 +27,6 @@ public class Trie
         root = new TrieNode();
     }
 
-    public TrieNode _getNode()
-    {
-        return root;
-    }
-
     // Learner will write this code
     public bool Search(string word)
     {
