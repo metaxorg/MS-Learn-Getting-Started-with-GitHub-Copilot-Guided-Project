@@ -31,60 +31,10 @@ public class Trie
     {
         return root;
     }
-
-    public bool Search(string word)
-    {
-        TrieNode current = root;
-
-        foreach (char c in word)
-        {
-            if (!current.HasChild(c))
-            {
-                return false;
-            }
-            current = current.Children[c];
-        }
-
-        return current.IsEndOfWord;
-    }
-
-    // Method to remove a word from the trie
-    private bool RemoveNodes(TrieNode root, string word, int index)
-    {
-        if (index == word.Length)
-        {
-            if (!root.IsEndOfWord)
-            {
-                return false;
-            }
-            // Unmark the end of word
-            root.IsEndOfWord = false;
-            return root.Children.Count == 0;
-        }
-
-        // Recursively delete the word
-        char c = word[index];
-        TrieNode node = root.Children[c];
-        if (node == null)
-        {
-            return false;
-        }
-
-        bool shouldDeleteCurrentNode = RemoveNodes(node, word, index + 1);
-
-        if (shouldDeleteCurrentNode)
-        {
-            root.Children.Remove(c);
-            return root.Children.Count == 0;
-        }
-
-        return false;
-    }
-
+    
     public bool Insert(string word)
     {
         TrieNode current = root;
-
         foreach (char c in word)
         {
             if (!current.HasChild(c))
@@ -93,21 +43,17 @@ public class Trie
             }
             current = current.Children[c];
         }
-
         if (current.IsEndOfWord)
         {
             return false;
         }
-        
         current.IsEndOfWord = true;
         return true;
     }
-
-    // TODO - not sure if this will be part of the starter code or not yet
+    
     public List<string> AutoSuggest(string prefix)
     {
         TrieNode currentNode = root;
-
         foreach (char c in prefix)
         {
             if (!currentNode.HasChild(c))
@@ -116,31 +62,63 @@ public class Trie
             }
             currentNode = currentNode.Children[c];
         }
-
         return GetAllWordsWithPrefix(currentNode, prefix);
     }
 
-    // TODO - not sure if this will be part of the starter code or not yet
     private List<string> GetAllWordsWithPrefix(TrieNode root, string prefix)
     {
         List<string> words = new List<string>();
-
         if (root.IsEndOfWord)
         {
             words.Add(prefix);
         }
-
         foreach (char c in root.Children.Keys)
         {
             words.AddRange(GetAllWordsWithPrefix(root.Children[c], prefix + c));
         }
-
         return words;
     }
 
-    // TODO - If GetAllWordsWithPrefix is removed, this should be to
     public List<string> GetAllWords()
     {
         return GetAllWordsWithPrefix(root, "");
+    }
+
+    public void PrintTrieStructure()
+    {
+        Console.WriteLine("\nroot");
+        _printTrieNodes(root);
+    }
+
+    private void _printTrieNodes(TrieNode root, string format = " ", bool isLastChild = true) 
+    {
+        if (root == null)
+            return;
+
+        Console.Write($"{format}");
+
+        if (isLastChild)
+        {
+            Console.Write("└─");
+            format += "  ";
+        }
+        else
+        {
+            Console.Write("├─");
+            format += "│ ";
+        }
+
+        Console.WriteLine($"{root._value}");
+
+        int childCount = root.Children.Count;
+        int i = 0;
+        var children = root.Children.OrderBy(x => x.Key);
+
+        foreach(var child in children)
+        {
+            i++;
+            bool isLast = i == childCount;
+            _printTrieNodes(child.Value, format, isLast);
+        }
     }
 }

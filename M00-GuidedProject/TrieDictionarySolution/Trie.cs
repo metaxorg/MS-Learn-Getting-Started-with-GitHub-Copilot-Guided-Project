@@ -79,7 +79,7 @@ public class Trie
         // Word successfully inserted into the trie
         return true;
     }
-    
+
     public List<string> AutoSuggest(string prefix)
     {
         TrieNode currentNode = root;
@@ -158,5 +158,43 @@ public class Trie
     public bool Delete(string word)
     {
         return DeleteHelper(root, word, 0);
+    }
+
+    public void PrintTrieStructure()
+    {
+        Console.WriteLine("\nroot");
+        _printTrieNodes(root);
+    }
+
+    private void _printTrieNodes(TrieNode root, string format = " ", bool isLastChild = true) 
+    {
+        if (root == null)
+            return;
+
+        Console.Write($"{format}");
+
+        if (isLastChild)
+        {
+            Console.Write("└─");
+            format += "  ";
+        }
+        else
+        {
+            Console.Write("├─");
+            format += "│ ";
+        }
+
+        Console.WriteLine($"{root._value}");
+
+        int childCount = root.Children.Count;
+        int i = 0;
+        var children = root.Children.OrderBy(x => x.Key);
+
+        foreach(var child in children)
+        {
+            i++;
+            bool isLast = i == childCount;
+            _printTrieNodes(child.Value, format, isLast);
+        }
     }
 }
