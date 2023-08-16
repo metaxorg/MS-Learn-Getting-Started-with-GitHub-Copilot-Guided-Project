@@ -10,8 +10,14 @@ string[] words = {
 
 Trie dictionary = InitializeTrie(words);
 PrintTrie(dictionary);
-GetPrefixInput();
+// GetPrefixInput();
 
+var similarWords = dictionary.GetSpellingSuggestions("astrout");
+Console.WriteLine("Spelling suggestions:");
+foreach (var word in similarWords)
+{
+    Console.WriteLine(word);
+}
 
 // This method initializes a Trie data structure with the given array of words.
 Trie InitializeTrie(string[] words)
@@ -27,6 +33,14 @@ Trie InitializeTrie(string[] words)
 
     // Return the initialized Trie.
     return trie;
+}
+
+void Delete(string word)
+{
+    if (dictionary.Search(word))
+    {
+        dictionary.Delete(word);
+    }
 }
 
 void PrintTrie(Trie trie)

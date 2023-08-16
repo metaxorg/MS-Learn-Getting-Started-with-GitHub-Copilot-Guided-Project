@@ -1,3 +1,6 @@
+using System;
+using System.Collections.Generic;
+
 public class TrieNode
 {
     public Dictionary<char, TrieNode> Children { get; set; }
@@ -153,6 +156,67 @@ public class Trie
     public bool Delete(string word)
     {
         return DeleteHelper(root, word, 0);
+    }
+
+    public List<string> GetSpellingSuggestions(string word)
+    {
+        List<string> suggestions = new List<string>();
+
+        // Get all words in the trie
+        // TODO maybe get all words that start with the first letter?
+        // Want to see if Copilot can improve the performance of this method for debugging
+        // Or do something with the edit distance idkkkk!!!
+        List<string> words = GetAllWords();
+        // Find the closest match to the misspelled word using a string similarity algorithm
+        foreach (string w in words)
+        {
+            int distance = LevenshteinDistance(word, w);
+            if (distance <= 2) // consider words with a Levenshtein distance of 2 or less as suggestions
+            {
+                suggestions.Add(w);
+            }
+        }
+
+        return suggestions;
+    }
+
+    private int LevenshteinDistance(string s, string t)
+    {
+        int m = s.Length;
+        int n = t.Length;
+        int[,] d = new int[m + 1, n + 1];
+
+        if (m == 0)
+        {
+            return n;
+        }
+
+        if (n == 0)
+        {
+            return m;
+        }
+
+        for (int i = 0; i <= m; i++)
+        {
+            d[i, 0] = i;
+        }
+
+        for (int j = 0; j <= n; j++)
+        {
+            d[0, j] = j;
+        }
+
+        for (int j = 1; j <= n; j++)
+        {
+            for (int i = 1; i <= m; i++)
+            {
+                int cost = (s[i - 1] == t[j - 1]) ? 0 : 1;
+
+                d[i, j] = Math.Min(Math.Min(d[i - 1, j] + 1, d[i, j - 1] + 1), d[i - 1, j - 1] + cost);
+            }
+        }
+
+        return d[m, n];
     }
 
     public void PrintTrieStructure()

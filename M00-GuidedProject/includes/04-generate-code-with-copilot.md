@@ -1,10 +1,8 @@
 ---
 title: Exercise - Use Copilot to generate code
 description: Exercise - Use Copilot to generate code
-durationInMinutes: 5
+durationInMinutes: 10
 ---
-
-TODO separate Copilot and Copilot Chat steps
 
 TODO - Introduction
 
