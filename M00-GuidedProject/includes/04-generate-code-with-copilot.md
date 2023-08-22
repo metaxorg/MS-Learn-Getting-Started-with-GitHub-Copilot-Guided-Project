@@ -4,11 +4,9 @@ description: Exercise - Use Copilot to generate code
 durationInMinutes: 10
 ---
 
-TODO - Introduction
+As you develop with Copilot, you'll find that it can help you complete your code much faster. Copilot can auto-complete code that you're writing, and also suggest code that you might need. In this exercise, you'll use Copilot to generate new methods in the Trie project. Let's get started!
 
 ## Use Copilot to auto-complete code
-
-TODO - Introduction
 
 1. Open the **Trie.cs** file
 
@@ -91,7 +89,7 @@ TODO - Introduction
 
 ## Prompt Copilot to generate specific code 
 
-TODO - Introduction
+Sometimes Copilot may not have the exact code you need. You can use prompting to generate more specific code.
 
 1. Delete the previously generated `Delete` method.
 
@@ -171,4 +169,48 @@ TODO - Introduction
 
 1. Press <kbd>Tab</kbd> or click **Accept** to apply the code suggestion.
 
-TODO - Conclusion
+## Check your work
+
+In this task, you'll test the methods you created with Copilot to verify that they work as expected.
+
+1. Open the **Program.cs** file.
+
+1. Comment out the call to the `Test` method:
+
+    ```c#
+    Trie dictionary = InitializeTrie(words);
+    // Test();
+    ```
+
+1. Copy and paste the following code below the commented line:
+
+    ```c#
+    PrintTrie(dictionary);
+    Console.WriteLine("\nSearching for \"follows\" in trie: " + dictionary.Search("follows"));
+    Console.WriteLine("Searching for \"forget\" in trie: " + dictionary.Search("forget"));
+    Console.WriteLine("Deleting \"cars\" from trie...\n");
+    dictionary.Delete("cars");
+    PrintTrie(dictionary);
+    ```
+
+1. In the file explorer, right click the **Program.cs** file and click **Open in Integrated Terminal**
+
+1. Enter ```dotnet run``` to run the program.
+
+1. Verify that your output is similar to the following
+
+    ```Output
+    The dictionary contains the following words:
+    as, astronaut, asteroid, are, around, cat, cars, cares, careful, carefully, for, forgot, follows, from, front, mellow, mean, money, monday, monster, place, plan, planet, planets, plans, the, their, they, there, towards,
+
+    Searching for "follows" in trie: True
+    Searching for "forget" in trie: False
+    Deleting "cars" from trie...
+
+    The dictionary contains the following words:
+    as, astronaut, asteroid, are, around, cat, cares, careful, carefully, for, forgot, follows, from, front, mellow, mean, money, monday, monster, place, plan, planet, planets, plans, the, their, they, there, towards,
+    ```
+
+    If your code displays different results, you'll need to review your code to find your error and make updates. Run the code again to see if you've fixed the problem. Continue updating and running your code until your code produces the expected results.
+
+1. Remove the pasted code from the **Program.cs** file and uncomment the `Test` method call.

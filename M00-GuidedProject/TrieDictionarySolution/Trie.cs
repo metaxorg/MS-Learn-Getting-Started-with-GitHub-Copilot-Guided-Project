@@ -102,7 +102,7 @@ public class Trie
     /// <returns>A list of all words in the trie that start with the given prefix.</returns>
     private List<string> GetAllWordsWithPrefix(TrieNode root, string prefix)
     {
-        List<string> words = new List<string>();
+        List<string> words = new();
 
         if (root.IsEndOfWord)
         {
@@ -160,18 +160,14 @@ public class Trie
 
     public List<string> GetSpellingSuggestions(string word)
     {
-        List<string> suggestions = new List<string>();
-
-        // Get all words in the trie
-        // TODO maybe get all words that start with the first letter?
-        // Want to see if Copilot can improve the performance of this method for debugging
-        // Or do something with the edit distance idkkkk!!!
-        List<string> words = GetAllWords();
-        // Find the closest match to the misspelled word using a string similarity algorithm
+        char firstLetter = word[0];
+        List<string> suggestions = new();
+        List<string> words = GetAllWordsWithPrefix(root.Children[firstLetter], firstLetter.ToString());
+        
         foreach (string w in words)
         {
             int distance = LevenshteinDistance(word, w);
-            if (distance <= 2) // consider words with a Levenshtein distance of 2 or less as suggestions
+            if (distance <= 2)
             {
                 suggestions.Add(w);
             }

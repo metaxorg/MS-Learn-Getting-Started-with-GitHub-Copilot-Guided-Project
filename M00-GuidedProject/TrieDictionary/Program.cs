@@ -9,8 +9,12 @@ string[] words = {
         "the", "their", "they", "there", "towards"};
 
 Trie dictionary = InitializeTrie(words);
-PrintTrie(dictionary);
-GetPrefixInput();
+Test();
+
+void Test() {
+    PrintTrie(dictionary);
+    GetPrefixInput();
+}
 
 Trie InitializeTrie(string[] words)
 {

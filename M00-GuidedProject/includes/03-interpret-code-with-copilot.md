@@ -4,16 +4,14 @@ description: Exercise - Use Copilot to interpret code
 durationInMinutes: 5
 ---
 
-TODO - Introduction
+In this exercise, you'll familiarize yourself with the Trie project by using Copilot to interpret the code. Let's get started!
 
-TODO - Note, this exercise uses features of Copilot Chat
+> [!IMPORTANT] This exercise uses features of Copilot Chat. To use Copilot Chat, you must have a GitHub account and be signed in to the GitHub Copilot extension. For more information, see [Use Copilot Chat](https://docs.github.com/github-copilot/copilot-chat/use-copilot-chat).
 
 > [!IMPORTANT]
 > You need to have completed the Setup instructions in the previous unit, Prepare, before you begin this Exercise.
 
 ## Use Copilot Chat to explain code
-
-In this task, you'll use Copilot to explain the existing code Let's get started!
 
 1. TODO navigate to project folder
 
@@ -48,7 +46,7 @@ In this task, you'll use Copilot to explain the existing code Let's get started!
 
 ## Add code comments with Copilot
 
-TODO - Introduction something like: You can use Copilot to auto-complete code comments.
+You can use Copilot to auto-complete code comments. This can help you better understand the code, and also help you add comments to your own code.
 
 1. Navigate to the `Insert` method in **Trie.cs**
 
@@ -78,7 +76,7 @@ TODO - Introduction something like: You can use Copilot to auto-complete code co
 
 ## Add code comments using Copilot Chat
 
-TODO - Introduction. Something like rather than prompting Copilot to add a comment to a single line of code, you can use Copilot Chat to add comments for multiple lines of code.
+Copilot Chat can add comments for multiple lines of code. This can be helpful when you want to add comments to a large block of code.
 
 1. Navigate to **Program.cs**
 
@@ -108,6 +106,4 @@ TODO - Introduction. Something like rather than prompting Copilot to add a comme
 
 1. Click **Accept** to add the documentation to the code.
 
-## Check your work
-
-TODO - Not sure how this section will work or if we will just omit it
+TODO - Conclusion

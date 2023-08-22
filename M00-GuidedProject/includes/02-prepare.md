@@ -8,7 +8,7 @@ You'll be using Visual Studio Code to develop an application that uses a diction
 
 ## Project overview
 
-TODO - Come up with a small scale scenario for this autocomplete project
+Suppose you're working on a language processing feature for a new application. Your feature needs to support a large number of words, and quickly search for words that match a given prefix. You've been given an existing code base that uses a trie data structure, which is a tree-based data structure that's particularly useful for prefix matching and autocompletion. You'll need to understand the code base and extend it to support your feature.
 
 ## Setup
 

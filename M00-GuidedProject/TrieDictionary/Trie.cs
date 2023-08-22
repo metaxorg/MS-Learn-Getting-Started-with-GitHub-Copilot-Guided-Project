@@ -116,4 +116,60 @@ public class Trie
             _printTrieNodes(child.Value, format, isLast);
         }
     }
+
+    public List<string> GetSpellingSuggestions(string word)
+    {
+        char firstLetter = word[0];
+        List<string> suggestions = new();
+        List<string> words = GetAllWordsWithPrefix(root.Children[firstLetter], firstLetter.ToString());
+        
+        foreach (string w in words)
+        {
+            int distance = LevenshteinDistance(word, w);
+            if (distance <= 2)
+            {
+                suggestions.Add(w);
+            }
+        }
+
+        return suggestions;
+    }
+
+    private int LevenshteinDistance(string s, string t)
+    {
+        int m = s.Length;
+        int n = t.Length;
+        int[,] d = new int[m, n];
+
+        if (m == 0)
+        {
+            return n;
+        }
+
+        if (n == 0)
+        {
+            return m;
+        }
+
+        for (int i = 0; i <= m; i++)
+        {
+            d[i, 0] = i;
+        }
+
+        for (int j = 0; j <= n; j++)
+        {
+            d[0, j] = j;
+        }
+
+        for (int j = 0; j <= n; j++)
+        {
+            for (int i = 0; i <= m; i++)
+            {
+                int cost = (s[i] == t[j]) ? 0 : 1;
+                d[i, j] = Math.Min(Math.Min(d[i, j] + 1, d[i, j] + 1), d[i, j] + cost);
+            }
+        }
+
+        return d[m, n];
+    }
 }

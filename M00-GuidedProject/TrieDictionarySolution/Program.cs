@@ -9,14 +9,33 @@ string[] words = {
         "the", "their", "they", "there", "towards"};
 
 Trie dictionary = InitializeTrie(words);
-PrintTrie(dictionary);
-// GetPrefixInput();
+Test();
 
-var similarWords = dictionary.GetSpellingSuggestions("astrout");
-Console.WriteLine("Spelling suggestions:");
-foreach (var word in similarWords)
+void Test()
 {
-    Console.WriteLine(word);
+    PrintTrie(dictionary);
+    GetPrefixInput();
+}
+
+void Exercise4Test() 
+{
+    PrintTrie(dictionary);
+    Console.WriteLine("\nSearching for \"follows\" in trie: " + dictionary.Search("follows"));
+    Console.WriteLine("Searching for \"forget\" in trie: " + dictionary.Search("forget"));
+    Console.WriteLine("Deleting \"cars\" from trie...\n");
+    dictionary.Delete("cars");
+    PrintTrie(dictionary);
+}
+
+void Exercise5Test() 
+{
+    PrintTrie(dictionary);
+    var similarWords = dictionary.GetSpellingSuggestions("cae");
+    Console.WriteLine("Spelling suggestions for \"cae\":");
+    foreach (var word in similarWords)
+    {
+        Console.WriteLine(word);
+    }
 }
 
 // This method initializes a Trie data structure with the given array of words.
@@ -47,11 +66,21 @@ void PrintTrie(Trie trie)
 {
     Console.WriteLine("The dictionary contains the following words:");
     List<string> words = trie.GetAllWords();
-    foreach (string word in words)
+    int numColumns = 5;
+    int numRows = (int)Math.Ceiling((double)words.Count / numColumns);
+
+    for (int row = 0; row < numRows; row++)
     {
-        Console.Write($"{word}, ");
+        for (int col = 0; col < numColumns; col++)
+        {
+            int index = row + col * numRows;
+            if (index < words.Count)
+            {
+                Console.Write($"{words[index],-15}");
+            }
+        }
+        Console.WriteLine();
     }
-    Console.WriteLine();
 }
 
 void GetPrefixInput()
