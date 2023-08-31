@@ -9,34 +9,10 @@ string[] words = {
         "the", "their", "they", "there", "towards"};
 
 Trie dictionary = InitializeTrie(words);
-Test();
-
-void Test()
-{
-    PrintTrie(dictionary);
-    GetPrefixInput();
-}
-
-void Exercise4Test() 
-{
-    PrintTrie(dictionary);
-    Console.WriteLine("\nSearching for \"follows\" in trie: " + dictionary.Search("follows"));
-    Console.WriteLine("Searching for \"forget\" in trie: " + dictionary.Search("forget"));
-    Console.WriteLine("Deleting \"cars\" from trie...\n");
-    dictionary.Delete("cars");
-    PrintTrie(dictionary);
-}
-
-void Exercise5Test() 
-{
-    PrintTrie(dictionary);
-    var similarWords = dictionary.GetSpellingSuggestions("cae");
-    Console.WriteLine("Spelling suggestions for \"cae\":");
-    foreach (var word in similarWords)
-    {
-        Console.WriteLine(word);
-    }
-}
+// SearchWord();
+PrefixAutocomplete();
+// DeleteWord();
+// GetSpellingSuggestions();
 
 // This method initializes a Trie data structure with the given array of words.
 Trie InitializeTrie(string[] words)
@@ -54,33 +30,87 @@ Trie InitializeTrie(string[] words)
     return trie;
 }
 
-void Delete(string word)
+void SearchWord()
 {
-    if (dictionary.Search(word))
+    while (true)
     {
-        dictionary.Delete(word);
+        Console.WriteLine("Enter a word to search for, or press Enter to exit.");
+        string? input = Console.ReadLine();
+        if (input == "")
+        {
+            break;
+        }
+        if (input != null && dictionary.Search(input))
+        {
+            Console.WriteLine($"Found \"{input}\" in dictionary");
+        }
+        else
+        {
+            Console.WriteLine($"Did not find \"{input}\" in dictionary");
+        }
     }
 }
 
-void PrintTrie(Trie trie)
+void PrefixAutocomplete()
 {
-    Console.WriteLine("The dictionary contains the following words:");
-    List<string> words = trie.GetAllWords();
-    int numColumns = 5;
-    int numRows = (int)Math.Ceiling((double)words.Count / numColumns);
+    PrintTrie(dictionary);
+    GetPrefixInput();
+}
 
-    for (int row = 0; row < numRows; row++)
+void DeleteWord() 
+{
+    PrintTrie(dictionary);
+    while(true)
     {
-        for (int col = 0; col < numColumns; col++)
+        Console.WriteLine("\nEnter a word to delete, or press Enter to exit.");
+        string? input = Console.ReadLine();
+        if (input == "")
         {
-            int index = row + col * numRows;
-            if (index < words.Count)
+            break;
+        }
+        if (input != null && dictionary.Search(input))
+        {
+            dictionary.Delete(input);
+            Console.WriteLine($"Deleted \"{input}\" from dictionary\n");
+            PrintTrie(dictionary);
+        }
+        else
+        {
+            Console.WriteLine($"Did not find \"{input}\" in dictionary");
+        }
+    }
+}
+
+void GetSpellingSuggestions() 
+{
+    PrintTrie(dictionary);
+    Console.WriteLine("\nEnter a word to get spelling suggestions for, or press Enter to exit.");
+    string? input = Console.ReadLine();
+    if (input != null)
+    {
+        var similarWords = dictionary.GetSpellingSuggestions(input);
+        Console.WriteLine($"Spelling suggestions for \"{input}\":");
+        if (similarWords.Count == 0)
+        {
+            Console.WriteLine("No suggestions found.");
+        }
+        else 
+        {
+            foreach (var word in similarWords)
             {
-                Console.Write($"{words[index],-15}");
+                Console.WriteLine(word);
             }
         }
-        Console.WriteLine();
     }
+}
+
+#pragma warning disable CS8321
+void RunAllExercises()
+{
+    SearchWord();
+    PrefixAutocomplete();
+    DeleteWord();
+    GetSpellingSuggestions();
 }
 
 void GetPrefixInput()
@@ -161,5 +191,26 @@ void GetPrefixInput()
             words = null;
             wordsIndex = 0;
         }
+    }
+}
+
+void PrintTrie(Trie trie)
+{
+    Console.WriteLine("The dictionary contains the following words:");
+    List<string> words = trie.GetAllWords();
+    int numColumns = 5;
+    int numRows = (int)Math.Ceiling((double)words.Count / numColumns);
+
+    for (int row = 0; row < numRows; row++)
+    {
+        for (int col = 0; col < numColumns; col++)
+        {
+            int index = row + col * numRows;
+            if (index < words.Count)
+            {
+                Console.Write($"{words[index],-15}");
+            }
+        }
+        Console.WriteLine();
     }
 }

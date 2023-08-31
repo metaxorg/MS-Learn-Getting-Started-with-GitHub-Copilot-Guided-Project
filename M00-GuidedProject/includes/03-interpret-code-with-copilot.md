@@ -13,7 +13,7 @@ In this exercise, you'll familiarize yourself with the Trie project by using Cop
 
 ## Use Copilot Chat to explain code
 
-1. TODO navigate to project folder
+1. In the File Explorer, expand the **TrieDictionary** folder.
 
 1. Open the **Trie.cs** file.
 
@@ -105,5 +105,3 @@ Copilot Chat can add comments for multiple lines of code. This can be helpful wh
     Copilot Chat should generate suggested documentation for the method. If no suggestion appears, click the **Regenerate** button.
 
 1. Click **Accept** to add the documentation to the code.
-
-TODO - Conclusion

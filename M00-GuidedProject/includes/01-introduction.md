@@ -18,7 +18,7 @@ This module will guide you through an existing Trie project, and help you learn 
 > This is a guided project module where you'll complete an end-to-end project by following step-by-step instructions.  
 
 > [!IMPORTANT]
-> TODO Disclaimer about Copilot generated results
+> This project relies on Github Copilot code completion. While GitHub Copilot can generate code, the results it produces may vary in accuracy and consistency. Please take this into consideration as you complete each exercise.
 
 ## Learning objectives
 

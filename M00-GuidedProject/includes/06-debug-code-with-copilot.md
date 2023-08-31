@@ -1,10 +1,12 @@
 ---
 title: Exercise - Debug code with Copilot Chat
 description: Exercise - Debug code with Copilot Chat
-durationInMinutes: 5
+durationInMinutes: 10
 ---
 
-TODO - Introduction
+Copilot Chat allows you to interact with Copilot using natural language. In this exercise, you'll use Copilot Chat to debug and improve code in the Trie project. Let's get started!
+
+TODO chat disclaimer
 
 ## Use Copilot Chat to debug code
 
@@ -58,28 +60,21 @@ In this task, you'll test the methods you created with Copilot to verify that th
 
 1. Open the **Program.cs** file
 
-1. Comment out the call to the `Test` method:
+1. Uncomment the `GetSpellingSuggestions` method call:
 
     ```c#
     Trie dictionary = InitializeTrie(words);
-    // Test();
-    ```
-
-1. Copy and paste the following code below the commented line:
-
-    ```c#
-    PrintTrie(dictionary);
-    var similarWords = dictionary.GetSpellingSuggestions("cae");
-    Console.WriteLine("Spelling suggestions for \"cae\":");
-    foreach (var word in similarWords)
-    {
-        Console.WriteLine(word);
-    }
+    // SearchWord();
+    // PrefixAutocomplete();
+    // DeleteWord();
+    GetSpellingSuggestions();
     ```
 
 1. In the file explorer, right click the **Program.cs** file and click **Open in Integrated Terminal**
 
 1. Enter ```dotnet run``` to run the program.
+
+1. Enter a misspelled word to generate spelling suggestions for, such as "cae"
 
 1. Verify that your output is similar to the following
 
@@ -91,6 +86,9 @@ In this task, you'll test the methods you created with Copilot to verify that th
     are            carefully      mellow         plan           they
     around         for            mean           planet         there
     cat            forgot         money          planets        towards
+
+    Enter a word to get spelling suggestions for, or press Enter to exit.
+    cae
     Spelling suggestions for "cae":
     cat
     cars
@@ -99,4 +97,4 @@ In this task, you'll test the methods you created with Copilot to verify that th
 
     If your code displays different results, you'll need to review your code to find your error and make updates. Run the code again to see if you've fixed the problem. Continue updating and running your code until your code produces the expected results.
 
-1. Remove the pasted code from the **Program.cs** file and uncomment the `Test` method call.
+1. Comment out the `GetSpellingSuggestions` method call.
