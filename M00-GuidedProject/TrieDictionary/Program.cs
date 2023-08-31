@@ -194,27 +194,6 @@ void PrintTrie(Trie trie)
 {
     Console.WriteLine("The dictionary contains the following words:");
     List<string> words = trie.GetAllWords();
-    int numColumns = 5;
-    int numRows = (int)Math.Ceiling((double)words.Count / numColumns);
-
-    for (int row = 0; row < numRows; row++)
-    {
-        for (int col = 0; col < numColumns; col++)
-        {
-            int index = row + col * numRows;
-            if (index < words.Count)
-            {
-                Console.Write($"{words[index],-15}");
-            }
-        }
-        Console.WriteLine();
-    }
-}
-
-void PrintTrie(Trie trie)
-{
-    Console.WriteLine("The dictionary contains the following words:");
-    List<string> words = trie.GetAllWords();
     foreach (string word in words)
     {
         Console.Write($"{word}, ");
