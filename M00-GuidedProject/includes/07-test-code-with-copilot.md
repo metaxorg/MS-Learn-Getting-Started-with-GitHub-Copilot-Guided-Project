@@ -4,11 +4,11 @@ description: Exercise - Test code with Copilot
 durationInMinutes: 5
 ---
 
-TODO - Introduction
+Copilot's ability to generate unit tests is a great time-saver for developers. In this exercise, you'll use Copilot to generate unit tests for the Trie project. Let's get started!
 
 ## Use Copilot to test code
 
-TODO some intro to the task
+In this exercise, you'll use Copilot to generate basic tests for the Trie methods.
 
 1. Open the **TrieTests.cs** file under **TrieDictionaryTest**
 
@@ -46,7 +46,7 @@ TODO some intro to the task
     // Test that a word is deleted from the trie if it is a prefix of another word
     ```
 
-    As you continue generating test code, you may notice that Copilot auto-completes the prompt, the `[TestMethod]` stub, as well as the code. Copilot's ability to predict the code you need makes generating unit tests much faster.
+    As you continue generating test code, you may notice that Copilot auto-completes the prompt, the `[TestMethod]` stub, as well as the code. Copilot's ability to predict the code you need makes generating unit tests much faster. Be sure to check that the generated assertions are correct.
 
     However, Copilot may not always predict the exact test you need. You may need to review the generated code and make changes to the test, or use more specific prompting
 
@@ -82,6 +82,7 @@ TODO some intro to the task
     ```c#
     // Test GetSpellingSuggestions for a word not present in the trie
     ```
+
 1. Enter a new line and wait for Copilot to generate code
 
     Check that the generated test is similar to the following, making any changes as need:
